@@ -18,6 +18,7 @@ exports.connection = (io) => {
     socket.on("message", (message) => {
       console.log(`message from ${socket.id}: ${message}`);
       io.to(socket.room).emit("control", {
+        id: `${socket.id}`,
         name: socketNames[socket.id],
         text: message,
         room: socket.room,
