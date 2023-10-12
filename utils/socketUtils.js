@@ -33,14 +33,6 @@ exports.connection = (io) => {
       socket.join(room); // Join the specified room
     });
 
-    socket.on("signal", (data) => {
-      // Broadcast the signaling data to the other peer in the same room
-      socket.to(data.room).emit("signal", {
-        signal: data.signal,
-        sender: socket.id,
-      });
-    });
-
     socket.on("disconnect", () => {
       console.log(`socket ${socket.id} disconnected`);
       delete socketNames[socket.id]; // Remove the name when disconnected
